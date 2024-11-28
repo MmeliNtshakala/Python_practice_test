@@ -193,27 +193,52 @@ class MyTestCase(unittest.TestCase):
 199 211 223 227 229 233 239 241 251 257 
 """,text_capture.getvalue())
         
-    def test_n_0(self):
-            # Test for n = 0 (base case)
-            self.assertEqual(patterns.pascal_triangle(0), [1])
+    def test_tower_of_hanoi_1(self):
+        hanoi = Hanoi(n=1)
+        for source, target in patterns.tower_of_hanoi(1, 0, 1, 2):
+            hanoi.move(source, target)
+        self.assertTrue(hanoi.is_complete(), "Whoops! Looks like you didn't complete the puzzle.")
 
-    def test_n_3(self):
-        # Test for n = 3
-        self.assertEqual(patterns.pascal_triangle(3), [1, 3, 3, 1])
+    def test_tower_of_hanoi_2(self):
+        hanoi = Hanoi(n=2)
+        for source, target in patterns.tower_of_hanoi(2, 0, 1, 2):
+            hanoi.move(source, target)
+        self.assertTrue(hanoi.is_complete(), "Whoops! Looks like you didn't complete the puzzle.")
 
-    def test_n_5(self):
-        # Test for n = 5
-        self.assertEqual(patterns.pascal_triangle(5), [1, 5, 10, 10, 5, 1])
+    def test_tower_of_hanoi_3(self):
+        hanoi = Hanoi(n=3)
+        for source, target in patterns.tower_of_hanoi(3, 0, 1, 2):
+            hanoi.move(source, target)
+        self.assertTrue(hanoi.is_complete(), "Whoops! Looks like you didn't complete the puzzle.")
 
-    def test_n_negative(self):
-        # Test for a negative value of n
-        with self.assertRaises(ValueError):
-            patterns.pascal_triangle(-1)
+    def test_tower_of_hanoi_4(self):
+        hanoi = Hanoi(n=4)
+        for source, target in patterns.tower_of_hanoi(4, 0, 1, 2):
+            hanoi.move(source, target)
+        self.assertTrue(hanoi.is_complete(), "Whoops! Looks like you didn't complete the puzzle.")
 
-    def test_n_large(self):
-        # Test for a large value of n
-        self.assertEqual(patterns.pascal_triangle(20), [1, 20, 190, 1140, 4845, 15504, 38760, 77520, 125970, 167960, 184756, 167960, 125970, 77520, 38760, 15504, 4845, 1140, 190, 20, 1])
+    def test_tower_of_hanoi_5(self):
+        hanoi = Hanoi(n=5)
+        for source, target in patterns.tower_of_hanoi(5, 0, 1, 2):
+            hanoi.move(source, target)
+        self.assertTrue(hanoi.is_complete(), "Whoops! Looks like you didn't complete the puzzle.")
 
 
+class Hanoi:
+    def __init__(self, n=3):
+        self.n = n
+        self.state = [list(reversed(range(n))), [], []]
+
+    def is_complete(self):
+        return self.state == [[], [], list(reversed(range(self.n)))]
+
+    def move(self, source, target):
+        if self.state[source] == []:
+            raise Exception("Whoops, looks like you tried to move a piece from an empty tower!")
+        if self.state[target] != [] and self.state[source][-1] > self.state[target][-1]:
+            raise Exception("Whoops, looks like you tried to move a piece onto a smaller piece!")
+        self.state[target].append(self.state[source].pop(-1))
+        
+    
 if __name__ == '__main__':
     unittest.main()
