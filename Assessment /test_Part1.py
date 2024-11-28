@@ -1,5 +1,5 @@
 import unittest
-
+from Part1 import *
 
 class TestFunctions(unittest.TestCase):
 
@@ -49,7 +49,8 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(reverse_words_in_sentence("Hello world"), "world Hello")
         self.assertEqual(reverse_words_in_sentence("A B C"), "C B A")
 
-    def test_unique_characters_in_string(self):
+    def test_unique_ual(self):
+        # self.acharacters_in_string(self):
         self.assertEqual(unique_characters_in_string("aabbcc"), "abc")
         self.assertEqual(unique_characters_in_string("hello"), "ehlo")
         self.assertEqual(unique_characters_in_string("racecar"), "acer")

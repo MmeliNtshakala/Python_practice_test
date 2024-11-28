@@ -87,22 +87,14 @@ def split(delimiters, text):
     :param text: string containing delimiters to use to split the string, e.g. `,;? `
     :return: a list of words from splitting text using the delimiters
     """
-
-    regex_pattern = '|'.join(map(re.escape, delimiters))
-    return re.split(regex_pattern, text, 0)
-
+    pass
 
 def get_delimiters(text):
     """
     Helper function.
     This function serves as an option to use to obtain delimiters.
     """
-    set_del = {word for word in text if word in string.punctuation}
-    delimiters = list(set_del)
-    delimiters = "".join(delimiters)+" "
-    return delimiters
-
-
+    pass
 def convert_to_word_list(text):
     """
     Returns all words in a senctence as a list without the punctuation and spaces.
